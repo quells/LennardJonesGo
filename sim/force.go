@@ -7,6 +7,7 @@ import (
 	"math"
 )
 
+// PairwiseLennardJonesForce calculates the force vector on particle Ri due to Rj using the Lennard Jones potential.
 func PairwiseLennardJonesForce(Ri, Rj [3]float64, L float64) [3]float64 {
 	if space.PointsAreEqual(Ri, Rj, L) {
 		panic(fmt.Sprintf("%v and %v are equal, the pairwise force is infinite", Ri, Rj))
@@ -17,6 +18,7 @@ func PairwiseLennardJonesForce(Ri, Rj [3]float64, L float64) [3]float64 {
 	return vector.Scale(r, f/mag_r)
 }
 
+// InternalForce calculates the total force vector on particle Ri due to the other particles in R due to a pairwise force.
 func InternalForce(Ri [3]float64, R [][3]float64, L float64) [3]float64 {
 	F := [3]float64{0, 0, 0}
 	for _, Rj := range R {

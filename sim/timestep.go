@@ -6,6 +6,7 @@ import (
 	"github.com/quells/LennardJones/verlet"
 )
 
+// TimeStep evolves the system by one unit of time using the Velocity Verlet algorithm for molecular dynamics.
 func TimeStep(R, V [][3]float64, L, M, h float64) ([][3]float64, [][3]float64) {
 	N := len(R)
 	A := make([][3]float64, N)

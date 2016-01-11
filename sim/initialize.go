@@ -1,3 +1,4 @@
+// Package sim implements molecular dynamics simulation. The current implementation uses a Lennard Jones potential, but is generalizable to other potentials.
 package sim
 
 import (
@@ -6,6 +7,7 @@ import (
 	"math/rand"
 )
 
+// InitPositionCubic initializes particle positions in a simple cubic configuration.
 func InitPositionCubic(N int, L float64) [][3]float64 {
 	R := make([][3]float64, N)
 	Ncube := 1
@@ -31,6 +33,8 @@ func InitPositionCubic(N int, L float64) [][3]float64 {
 	return R
 }
 
+// InitVelocity initializes particle velocities selected from a random distribution.
+// Ensures that the net momentum of the system is zero and scales the average kinetic energy to match a given temperature.
 func InitVelocity(N int, T0 float64, M float64) [][3]float64 {
 	V := make([][3]float64, N)
 	rand.Seed(1)
