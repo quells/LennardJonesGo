@@ -33,6 +33,7 @@ func InitPositionCubic(N int, L float64) [][3]float64 {
 	return R
 }
 
+// InitPositionFCC initializes particle positions in a face-centered cubic configuration
 func InitPositionFCC(N int, L float64) [][3]float64 {
 	R := make([][3]float64, N)
 	Ncube := 1
