@@ -13,18 +13,35 @@ func PairwiseLennardJonesForce(Ri, Rj [3]float64, L float64) [3]float64 {
 		panic(fmt.Sprintf("%v and %v are equal, the pairwise force is infinite", Ri, Rj))
 	}
 	r := space.Displacement(Ri, Rj, L)
-	mag_r := vector.Length(r)
-	f := 4 * (-12*math.Pow(mag_r, -13) + 6*math.Pow(mag_r, -7))
-	return vector.Scale(r, f/mag_r)
+	magR := vector.Length(r)
+	f := 4 * (-12*math.Pow(magR, -13) + 6*math.Pow(magR, -7))
+	return vector.Scale(r, f/magR)
 }
 
 // InternalForce calculates the total force vector on particle Ri due to the other particles in R due to a pairwise force.
-func InternalForce(Ri [3]float64, R [][3]float64, L float64) [3]float64 {
+func InternalForce(i int, R [][3]float64, L float64) [3]float64 {
 	F := [3]float64{0, 0, 0}
-	for _, Rj := range R {
-		if !space.PointsAreEqual(Ri, Rj, L) {
-			F = vector.Sum(F, PairwiseLennardJonesForce(Ri, Rj, L))
+	for j := range R {
+		if i != j {
+			F = vector.Sum(F, PairwiseLennardJonesForce(R[i], R[j], L))
 		}
 	}
 	return F
+}
+
+// ForceReturn holds the index and force on a particle
+type ForceReturn struct {
+	i int
+	F [3]float64
+}
+
+// InternalForceParallel does the same as InternalForce but with channels
+func InternalForceParallel(i int, R [][3]float64, L float64, c chan ForceReturn) {
+	F := [3]float64{0, 0, 0}
+	for j := range R {
+		if i != j {
+			F = vector.Sum(F, PairwiseLennardJonesForce(R[i], R[j], L))
+		}
+	}
+	c <- ForceReturn{i, F}
 }

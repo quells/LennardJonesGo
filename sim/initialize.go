@@ -33,6 +33,39 @@ func InitPositionCubic(N int, L float64) [][3]float64 {
 	return R
 }
 
+func InitPositionFCC(N int, L float64) [][3]float64 {
+	R := make([][3]float64, N)
+	Ncube := 1
+	for N > 4*Ncube*Ncube*Ncube {
+		Ncube++
+	}
+	o := -L / 2
+	origin := [3]float64{o, o, o}
+	rs := L / float64(Ncube)
+	roffset := rs / 2
+	i := 0
+	for x := 0; x < Ncube; x++ {
+		x := float64(x)
+		for y := 0; y < Ncube; y++ {
+			y := float64(y)
+			for z := 0; z < Ncube; z++ {
+				z := float64(z)
+				pos := vector.Scale([3]float64{x, y, z}, rs)
+				pos = vector.Sum(pos, origin)
+				R[i] = pos
+				i++
+				R[i] = vector.Sum(pos, [3]float64{roffset, roffset, 0})
+				i++
+				R[i] = vector.Sum(pos, [3]float64{roffset, 0, roffset})
+				i++
+				R[i] = vector.Sum(pos, [3]float64{0, roffset, roffset})
+				i++
+			}
+		}
+	}
+	return R
+}
+
 // InitVelocity initializes particle velocities selected from a random distribution.
 // Ensures that the net momentum of the system is zero and scales the average kinetic energy to match a given temperature.
 func InitVelocity(N int, T0 float64, M float64) [][3]float64 {
