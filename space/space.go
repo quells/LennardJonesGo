@@ -1,7 +1,7 @@
 // Package space implements utilities to do vector math with periodic boundary conditions.
 package space
 
-import "github.com/quells/LennardJones/vector"
+import "github.com/quells/LennardJonesGo/vector"
 
 // PutInBox normalizes a vector to fit inside a cell with periodic boundary conditions.
 func PutInBox(r [3]float64, L float64) [3]float64 {
