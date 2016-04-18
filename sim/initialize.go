@@ -2,7 +2,7 @@
 package sim
 
 import (
-	"github.com/quells/LennardJones/vector"
+	"github.com/quells/LennardJonesGo/vector"
 	"math"
 	"math/rand"
 )
