@@ -3,7 +3,7 @@ package main
 
 import (
 	//"fmt"
-	"github.com/quells/LennardJones/sim"
+	"github.com/quells/LennardJonesGo/sim"
 )
 
 // Globals holds global simulation constants
