@@ -1,9 +1,9 @@
 package sim
 
 import (
-	"github.com/quells/LennardJones/space"
-	"github.com/quells/LennardJones/vector"
-	"github.com/quells/LennardJones/verlet"
+	"github.com/quells/LennardJonesGo/space"
+	"github.com/quells/LennardJonesGo/vector"
+	"github.com/quells/LennardJonesGo/verlet"
 )
 
 // TimeStep evolves the system by one unit of time using the Velocity Verlet algorithm for molecular dynamics.
