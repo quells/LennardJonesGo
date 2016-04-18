@@ -1,8 +1,8 @@
 package sim
 
 import (
-	"github.com/quells/LennardJones/space"
-	"github.com/quells/LennardJones/vector"
+	"github.com/quells/LennardJonesGo/space"
+	"github.com/quells/LennardJonesGo/vector"
 	"math"
 )
 
