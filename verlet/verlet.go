@@ -2,7 +2,7 @@
 package verlet
 
 import (
-	"github.com/quells/LennardJones/vector"
+	"github.com/quells/LennardJonesGo/vector"
 )
 
 // NextR calculates the next position vector based on current position, velocity, and acceleration.
