@@ -3,19 +3,24 @@ package sim
 import (
 	"github.com/quells/LennardJonesGo/space"
 	"github.com/quells/LennardJonesGo/vector"
-	"math"
 )
 
 // PairwiseLennardJonesPotential calculates the Lennard Jones potential between two positions.
 func PairwiseLennardJonesPotential(Ri, Rj [3]float64, L float64) float64 {
-	r := space.Distance(Ri, Rj, L)
-	return 4 * (math.Pow(r, -12) - math.Pow(r, -6))
+	r := space.Displacement(Ri, Rj, L)
+	R2 := vector.SqLength(r)
+	iR2 := 1.0 / R2
+	iR6 := iR2 * iR2 * iR2
+	iR12 := iR6 * iR6
+	return 4 * (iR12 - iR6)
+	// r := space.Distance(Ri, Rj, L)
+	// return 4 * (math.Pow(r, -12) - math.Pow(r, -6))
 }
 
 // KineticEnergy calculates the kinetic energy of a particle.
 func KineticEnergy(v [3]float64, m float64) float64 {
-	s := vector.Length(v)
-	return 0.5 * m * s * s
+	v2 := vector.SqLength(v)
+	return 0.5 * m * v2
 }
 
 // TotalKineticEnergy calculates the kinetic energy of all particles in the system.

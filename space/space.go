@@ -30,5 +30,9 @@ func Distance(a, b [3]float64, L float64) float64 {
 
 // PointsAreEqual tests whether two points are equal in a cell with periodic boundary conditions.
 func PointsAreEqual(a, b [3]float64, L float64) bool {
-	return Displacement(a, b, L) == [3]float64{0, 0, 0}
+	x := a[0] == b[0]
+	y := a[1] == b[1]
+	z := a[2] == b[2]
+	return x && y && z
+	//return Displacement(a, b, L) == [3]float64{0, 0, 0}
 }

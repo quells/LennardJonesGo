@@ -36,3 +36,11 @@ func Length(r [3]float64) float64 {
 	}
 	return math.Sqrt(sum)
 }
+
+func SqLength(r [3]float64) float64 {
+	var sum float64 = 0
+	for _, v := range r {
+		sum += v * v
+	}
+	return sum
+}
