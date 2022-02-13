@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"time"
 
 	"github.com/quells/LennardJonesGo/sim"
@@ -24,11 +25,12 @@ func main() {
 	Rs := sim.InitPositionFCC(g.N, g.L)
 	Vs := sim.InitVelocity(g.N, g.T0, g.M)
 
-	T := 10
+	numSteps := 100
 	start := time.Now()
-	for t := 1; t <= T; t++ {
+	for t := 1; t <= numSteps; t++ {
 		Rs, Vs = sim.TimeStepParallel(Rs, Vs, g.L, g.M, g.h)
 	}
 	elapsed := time.Since(start)
-	fmt.Printf("%v for %d time steps\n", elapsed, T)
+	numCPUs := runtime.NumCPU()
+	fmt.Printf("%v for %d time steps with %d particles using %d CPUs\n", elapsed, numSteps, g.N, numCPUs)
 }
