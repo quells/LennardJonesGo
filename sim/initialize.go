@@ -2,10 +2,13 @@
 package sim
 
 import (
-	"github.com/quells/LennardJonesGo/vector"
 	"math"
 	"math/rand"
+
+	"github.com/quells/LennardJonesGo/vector"
 )
+
+type InitPosition func(N int, L float64) [][3]float64
 
 // InitPositionCubic initializes particle positions in a simple cubic configuration.
 func InitPositionCubic(N int, L float64) [][3]float64 {

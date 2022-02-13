@@ -24,6 +24,10 @@ func main() {
 
 	Rs := sim.InitPositionFCC(g.N, g.L)
 	Vs := sim.InitVelocity(g.N, g.T0, g.M)
+	for _, v := range Vs {
+		fmt.Println(v)
+	}
+	return
 
 	numSteps := 100
 	start := time.Now()

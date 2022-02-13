@@ -52,3 +52,11 @@ func TotalEnergy(Rs, Vs [][3]float64, L, M float64) (sum float64) {
 	sum += TotalPotentialEnergy(Rs, L)
 	return
 }
+
+// Stats about the system including Kinetic Energy, Potential Energy, and Temperature
+func Stats(Rs, Vs [][3]float64, L, M float64) (K, U, T float64) {
+	K = TotalKineticEnergy(Vs, M)
+	U = TotalPotentialEnergy(Rs, L)
+	T = K * 2 / 3 / float64(len(Rs))
+	return
+}
